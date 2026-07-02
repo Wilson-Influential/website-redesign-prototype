@@ -63,6 +63,28 @@ filterBtns.forEach((btn) => {
   });
 });
 
+// Hero photo cluster: gentle mouse parallax (desktop, motion allowed)
+const cluster = document.getElementById('cluster');
+if (cluster && matchMedia('(pointer:fine)').matches && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  const snaps = cluster.querySelectorAll('.snap');
+  let tx = 0, ty = 0, cx = 0, cy = 0, raf = null;
+  const tick = () => {
+    cx += (tx - cx) * 0.08; cy += (ty - cy) * 0.08;
+    snaps.forEach((s) => {
+      const d = parseFloat(s.dataset.depth || 10);
+      s.style.translate = `${cx * d}px ${cy * d}px`;
+    });
+    if (Math.abs(tx - cx) > 0.001 || Math.abs(ty - cy) > 0.001) raf = requestAnimationFrame(tick);
+    else raf = null;
+  };
+  document.querySelector('.hero').addEventListener('mousemove', (e) => {
+    const r = cluster.getBoundingClientRect();
+    tx = ((e.clientX - r.left) / r.width - 0.5) * -1;
+    ty = ((e.clientY - r.top) / r.height - 0.5) * -1;
+    if (!raf) raf = requestAnimationFrame(tick);
+  });
+}
+
 // Contact form (prototype: no backend, show confirmation)
 const form = document.querySelector('form.form');
 if (form) {
