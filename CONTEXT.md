@@ -54,4 +54,7 @@ website redesign", implement the plan, and give him a link to review.
 
 ## Status
 
-- 2026-07-02: built, QA'd in preview, deployed (see link in links.json / memory)
+- 2026-07-02: built, QA'd in preview, LIVE at
+  https://wilson-influential.github.io/website-redesign-prototype/
+  (repo Wilson-Influential/website-redesign-prototype, work GitHub Pages).
+  Preview server: `website-prototype` on port 4198. Copy not humanized.
